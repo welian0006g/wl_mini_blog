@@ -1,0 +1,27 @@
+<% include _header %>
+
+
+<table class="table">
+<tr>
+  <td> Id: </td><td> <%- user._id %></td>
+</tr>
+<tr>
+  <td> Username: </td><td> <%- user.username %> </td>
+</tr>
+<tr>
+  <td> Created At: </td><td> <%- user.createdAt %> </td>
+</tr>
+<tr>
+  <td> <input type="button" id="return_button" class="btn btn-success" value="Return"></button> </td><td></td>
+</tr>
+</table>
+
+<script type="text/javascript">
+    $(function() {
+       $("#return_button").click(function() {
+          window.location.href="/";
+       });
+    });
+</script>
+
+<% include _footer %>

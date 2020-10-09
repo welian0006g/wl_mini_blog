@@ -1,0 +1,61 @@
+<% include _header %>
+
+<h1>New Blog</h1>
+
+<form action="/new_blog" method="post">
+   <div class="row">
+       <div class="form-group col-lg-10">
+           <label for="title">Title: </label>
+           <input type="text" name="title" id="title" class="form-control" placeholder="Title" required>
+       </div>
+   </div>
+
+   <div class="row">
+       <div class="form-group col-lg-10">
+           <label for="content">Content: </label>
+           <textarea name="content" id="content" class="form-control" placeholder="Content" style="height:250px">
+
+           </textarea>
+       </div>
+   </div>
+
+   <div class="row">
+       <div class="form-group col-lg-10">
+         <font color="black" id="current_time"></font>
+       </div>
+   </div>
+
+   <div class="row">
+       <div class="form-group col-lg-10">
+         <input type="submit" id="submit" value="Submit" class="btn btn-primary"/>
+         <input type="button" id="return_button" value="Return" class="btn btn-success"/>
+       </div>
+   </div>
+</form>
+
+<script type="text/javascript">
+    setCurrentTime();
+
+    function setCurrentTime(){
+        $("#current_time").html(new Date());
+        setTimeout("setCurrentTime();",1000);
+    }
+
+    $(function() {
+       $("#submit").click(function(e) {
+           if($("#title").val().replace(/\s+/g,'')==""){
+               alert("Title cannot be empty.");
+               e.preventDefault();
+           }
+           
+           if($("#content").val().replace(/\s+/g,'')==""){
+               alert("Content cannot be empty");
+               e.preventDefault();
+           }
+       });
+
+       $("#return_button").click(function(){
+           window.location.href="/";
+       });
+    });
+</script>

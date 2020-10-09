@@ -1,0 +1,54 @@
+<% include _header %>
+
+
+<table class="table">
+<tr>
+  <td> Id: </td><td> <%- blog._id %></td>
+</tr>
+<tr>
+  <td> Title: </td><td> <%- blog.title %> </td>
+</tr>
+<tr>
+  <td> Content: </td><td> <%- blog.content %> </td>
+</tr>
+<tr>
+  <td> Author: </td><td> <%- blog.user_name %> </td>
+</tr>
+<tr>
+  <td> <input type="button" id="return_button" class="btn btn-success" value="Return"></input> <input type="button" id="delete_button" class="btn btn-danger" value="Delete" style="visibility:hidden"></input> </td>
+  <td></td>
+</tr>
+</table>
+
+<script type="text/javascript">
+    $(function() {
+       $("#return_button").click(function() {
+          window.location.href="/";
+       });
+
+       //If not logged in the following will have syntax error.
+       if("<%- currentUser._id %>"=="<%- blog.user_id %>"){
+          $("#delete_button").css("visibility","visible");
+       }
+
+       $("#delete_button").click(function() {
+          var reply = confirm("Do you want to delete this blog?");
+          if(reply) {   
+             $.ajax({
+               "url": "/blog/<%- blog._id %>",
+               "type": "delete",
+               "data": {},
+               "dataType": "json",
+               "success": function(data) {
+                   window.location.href="/";
+               },
+               "error": function(data) {
+                   alert("Error deleting blog");
+               }
+            });
+          }
+       });
+    });
+</script>
+
+<% include _footer %>

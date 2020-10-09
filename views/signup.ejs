@@ -1,0 +1,25 @@
+<% include _header  %>
+
+<div style="margin-left: 20px">
+<h1>Sign up</h1>
+</div>
+
+<form action="/signup" method="post" role="form" style="margin-left:20px">
+   <div class="row">
+    <div class="form-group col-lg-5">
+      <label for="username">Username: </label>
+      <input name="username" type="text" id="username" type="text" class="form-control" placeholder="Username" required>
+    </div>
+   </div>
+   <div class="row">
+    <div class="form-group col-lg-5">
+      <label for="password">Password: </label>
+      <input name="password" type="password" id="password" type="text" class="form-control" placeholder="Password" required>
+    </div>
+   </div>
+   <div class="row">
+    <div class="form-group col-lg-5">
+     <input type="submit" value="Sign Up" class="btn btn-primary">
+    </div>
+   </div>
+</form>

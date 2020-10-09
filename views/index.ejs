@@ -1,0 +1,58 @@
+<% include _header %>
+
+
+<h1>All blogs:</h1>
+
+<link rel="stylesheet" href="css/pagination.css"/>
+<script type="text/javascript" src="js/pagination.min.js"></script>
+<br/>
+
+<div><font size="5"><a href="/new_blog">Write New Blog</a></font></div>
+<div><font size="3">Today is: <%- (new Date().getFullYear())+'/'+(new Date().getMonth()+1)+'/'+(new Date().getDate()) %></font> </div>
+<br/>
+
+<div id="blogs_div">
+</div>
+
+<div id="pager">
+</div>
+
+
+
+<script type="text/javascript">
+     
+     $(function() {
+
+        var blogs = JSON.parse(htmlDecode("<%= JSON.stringify(blogs) %>"));
+        
+        $("#pager").pagination({
+           dataSource: function(done) {
+              var result = [];
+              for (var i=0;i<blogs.length;i++) {
+                 result.push(i);
+              }
+              done(result);
+           },
+           pageSize: 4,
+           className: 'paginationjs-theme-blue',
+           callback: function(data,pagination) {
+                var result_html = "";
+                for(var j=0;j<data.length;j++) {
+                     var date = new Date(""+blogs[data[j]].createdAt);
+                     result_html +=  ('<div class="panel panel-default"><div class="panel-heading" style="background-color: #e3f2fd">'+ (blogs[data[j]].title)+'<div class="pull-right">Author: <a href="/user/'+(blogs[data[j]].user_id)+'">'+(blogs[data[j]].user_name)+'</a> '+(date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds())+'</div>'+'</div>');
+                     result_html +=  ('<div class="panel-body">'+(blogs[data[j]].content)+ '<div class="pull-right"><a href="/blog/'+(blogs[data[j]]._id)+'">Details</a></div>'+'</div></div>');
+                }
+                $("#blogs_div").html(result_html);
+           }
+        });
+     });
+
+     function htmlDecode(input){
+       var e = document.createElement('div');
+       e.innerHTML = input;
+       return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+     }
+</script>
+
+<% include _footer %>
+
