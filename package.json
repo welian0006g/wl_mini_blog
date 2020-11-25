@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo ./test/ci_test01.js"
+    "test": "node ./test/ci_test01.js"
   },
   "dependencies": {
     "ejs": "^1.0.0",
